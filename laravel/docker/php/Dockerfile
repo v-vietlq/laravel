@@ -24,8 +24,14 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath opcache
 RUN docker-php-ext-enable imagick
 
-# Installing composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Install composer
+ENV COMPOSER_HOME /composer \
+    PATH ./vendor/bin:/composer/vendor/bin:$PATH \
+    COMPOSER_ALLOW_SUPERUSER 1 \
+RUN curl --silent --show-error https://getcomposer.org/installer | php
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Setting locales
 RUN echo fr_FR.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
+
+WORKDIR /var/www/html

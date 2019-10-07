@@ -1,2 +1,2 @@
 #!/bin/bash
-./vendor/bin/phpunit
+./laravel/vendor/bin/phpunit

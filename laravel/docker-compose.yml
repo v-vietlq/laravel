@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  web:
+  php:
     build: docker/php
     image: laravel
     depends_on:

@@ -3,4 +3,4 @@
 
 scp -i /opt/prod ./jenkins/deploy/publish root@144.202.3.128:/tmp/publish
 scp -i /opt/prod -R laravel/* root@144.202.3.128:~/laravel
-ssh -i /opt/prod root@144.202.3.128 "sudo /tmp/publish"
+ssh -i /opt/prod root@144.202.3.128 "/tmp/publish"

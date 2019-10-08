@@ -5,7 +5,7 @@ IP=$1
 
 ssh-keygen -f prod
 cp prod /opt/prod
-cat prod.pub | ssh root@144.202.3.128 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+cat prod.pub | ssh root@$IP "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
 
 #install docker jenkins server and production server
 scp -i /opt/prod production.sh root@$IP:~/production.sh

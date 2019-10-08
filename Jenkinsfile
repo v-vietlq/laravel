@@ -28,7 +28,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'sudo bash ./jenkins/deploy/deploy.sh'
+                sh "sudo bash ./jenkins/deploy/deploy.sh {$IP}"
             }
         }
     }

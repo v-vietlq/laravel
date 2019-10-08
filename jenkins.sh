@@ -1,5 +1,6 @@
 #!/bin/bash
 
+IP=$1
 #connect jenkins server to production server
 
 ssh-keygen -f prod
@@ -7,8 +8,8 @@ cp prod /opt/prod
 cat prod.pub | ssh root@144.202.3.128 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
 
 #install docker jenkins server and production server
-scp -i /opt/prod production.sh root@144.202.3.128:~/production.sh
-ssh -i /opt/prod root@144.202.3.128 "sudo bash ~/production.sh"
+scp -i /opt/prod production.sh root@$IP:~/production.sh
+ssh -i /opt/prod root@$IP "sudo bash ~/production.sh"
 
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh

@@ -78,10 +78,9 @@
                     @endauth
                 </div>
             @endif
-
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel le
+                    Laravel OK
                 </div>
 
                 <div class="links">

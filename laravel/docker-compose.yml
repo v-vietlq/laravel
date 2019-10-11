@@ -9,7 +9,9 @@ services:
     restart: always
     volumes:
       - ./:/var/www/html
-      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    depends_on:
+      - phpmyadmin
+      - redis
     networks: 
       - net
 
@@ -20,10 +22,6 @@ services:
     restart: always
     depends_on:
       - php
-      - phpmyadmin
-    volumes:
-      - ./:/var/www/html
-      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     ports:
       - "80:80"
     volumes:
@@ -34,20 +32,13 @@ services:
   
   #MySQL Service
   mysql:
-    image: mysql:latest
+    image: mysql:8
     container_name: mysql_laravel
-    restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: 'pass'
-      MYSQL_DATABASE: 'laravel'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'pass'
     ports:
       - 3306:3306
-    volumes:
-      - ./dbdata:/var/lib/mysql/
-      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
     networks: 
       - net
    
@@ -63,8 +54,6 @@ services:
     environment:
       PMA_HOST: mysql
     depends_on:
-      - mysql 
-    links:
       - mysql
     networks: 
       - net

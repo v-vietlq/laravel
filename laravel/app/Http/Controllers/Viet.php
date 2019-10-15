@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class Viet extends Controller
 {
     public function hello() {
-        return 'Hello World viet';
+        return 'Hello Quoc Viet';
     }
 }

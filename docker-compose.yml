@@ -4,11 +4,11 @@ services:
 
 #PHP Service
   php:
-    build: laravel/docker/php
+    build: src/laravel/docker/php
     container_name: php_laravel
     restart: always
     volumes:
-      - ./laravel:/var/www/html
+      - ./src/laravel:/var/www/html
     depends_on:
       - phpmyadmin
       - redis
@@ -25,20 +25,21 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./laravel:/var/www/html
-      - ./my-app:/var/www/myapp
-      - ./my-app/build:/usr/share/nginx/html
-      - ./laravel/docker/nginx/default:/etc/nginx/conf.d/default.conf
+      - ./src/laravel:/var/www/html
+      - ./src/my-app:/var/www/myapp
+      - ./src/my-app/build:/usr/share/nginx/html
+      - ./src/laravel/docker/nginx/default:/etc/nginx/conf.d/default.conf
     networks: 
       - net
-
+  
+  # React Js
   reactjs:
-    build: my-app
+    build: src/my-app
     ports:
       - "3000:3000"
     volumes:
       - ./app/node_modules
-      - ./my-app:/app
+      - ./src/my-app:/app
     networks:
       - net
   #MySQL Service
